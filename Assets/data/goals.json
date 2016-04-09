@@ -1,0 +1,25 @@
+{
+    "goalList": [
+        {
+            "id": 1,
+            "name": "Test goal 1",
+            "completed": false,
+            "totalTasks": 10,
+            "completedTasks": 3
+        },
+        {
+            "id": 2,
+            "name": "Test goal 2",
+            "completed": false,
+            "totalTasks": 1,
+            "completedTasks": 1
+        },
+        {
+            "id": 3,
+            "name": "Test goal 3",
+            "completed": false,
+            "totalTasks": 5,
+            "completedTasks": 0
+        }
+    ]
+}
