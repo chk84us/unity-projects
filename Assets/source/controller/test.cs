@@ -11,10 +11,16 @@ public class test : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//JsonIo io = new JsonIo ();
-		//io.SerializeData(createTestGoals(), getFilePath());
-		//Debug.Log("JSON = " + readData());
-		readData();
+
+//		Serialization example
+//		new JsonIo ().SerializeData(createTestGoals(), getFilePath());
+
+//		Deserialization example
+		foreach (GoalModel g in readData().goalList) {
+			Debug.Log ("ID = " + g.id);
+			Debug.Log ("Name = " + g.name);
+			Debug.Log ("Completed = " + g.completed);
+		}
 	}
 
 	private GoalListWrapperModel createTestGoals() {
@@ -28,19 +34,9 @@ public class test : MonoBehaviour {
 		return goalsListWrapper;
 	}
 
-	private void readData() {
-		JsonIo io = new JsonIo ();
-		GoalListWrapperModel goalsWrapper;// = new GoalListWrapperModel ();
-
-		goalsWrapper = io.DeserializeData<GoalListWrapperModel>(File.ReadAllText(getFilePath()));
-
-		foreach (GoalModel g in goalsWrapper.goalList) {
-			Debug.Log ("ID = " + g.id);
-			Debug.Log ("Name = " + g.name);
-			Debug.Log ("Completed = " + g.completed);
-		}
-
-		//return JsonUtility.ToJson (goalsWrapper, true);
+	private GoalListWrapperModel readData() {
+		return new JsonIo ().
+			DeserializeData<GoalListWrapperModel>(File.ReadAllText(getFilePath()));
 	}
 
 	private string getFilePath() {
