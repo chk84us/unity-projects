@@ -11,8 +11,8 @@ namespace utils {
 			File.WriteAllText (path, JsonUtility.ToJson(dataObject, true));
 		}
 
-		public System.Object DeserializeData (string path) {
-			return JsonUtility.FromJson<System.Object>(path);
+		public T DeserializeData<T> (string json) {
+			return JsonUtility.FromJson<T>(json);
 		}
 	}
 }
