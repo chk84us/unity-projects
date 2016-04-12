@@ -4,8 +4,8 @@
             "id": 1,
             "name": "Test goal 1",
             "completed": false,
-            "totalTasks": 10,
-            "completedTasks": 3
+            "totalTasks": 12,
+            "completedTasks": 5
         },
         {
             "id": 2,
@@ -19,7 +19,28 @@
             "name": "Test goal 3",
             "completed": false,
             "totalTasks": 5,
-            "completedTasks": 0
+            "completedTasks": 2
+        },
+		{
+            "id": 4,
+            "name": "Test goal 4",
+            "completed": false,
+            "totalTasks": 100,
+            "completedTasks": 33
+        },
+        {
+            "id": 5,
+            "name": "Test goal 5",
+            "completed": false,
+            "totalTasks": 10,
+            "completedTasks": 3
+        },
+        {
+            "id": 6,
+            "name": "Test goal 6",
+            "completed": false,
+            "totalTasks": 8,
+            "completedTasks": 3
         }
     ]
 }
