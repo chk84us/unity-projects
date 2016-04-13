@@ -12,13 +12,15 @@ public class GoalViewController : MonoBehaviour {
 	private const string fileName = "goals.json";
 	private const string dataFolderName = "data";
 
-	private List<string> percentages;
+	private List<float> percentages;
 	private List<GameObject> goalCellList;
 
-	void Start () {
-		percentages = new List<string> ();
-		goalCellList = new List<GameObject> ();
+	public float transitionSpeed = 1f;
+	public float startTime = 1.0f;
 
+	void Start () {
+		goalCellList = new List<GameObject> ();
+		percentages = new List<float> ();
 		GoalListWrapperModel goals = getObjectFromJson();
 		foreach(GoalModel g in goals.goalList) {
 			GameObject goalCell = Instantiate<GameObject> (GoalCellPrefab);
@@ -30,9 +32,9 @@ public class GoalViewController : MonoBehaviour {
 			getObjectiveTextComponent (goalCell).text = g.id + ": " + g.name;
 			transform.Find (goalCell.name + "/Objective/objectiveText").GetComponent<Text> ().fontSize = 30;
 			float completedPercent = ((float)g.completedTasks/ (float)g.totalTasks);
-
-			getProgressImage (goalCell).fillAmount = completedPercent;
-			getCompletedProgress (goalCell).text = (completedPercent * 100).ToString ("F") + "%";
+			percentages.Add (completedPercent);
+//			getProgressImage (goalCell).fillAmount = completedPercent;
+//			getCompletedProgress (goalCell).text = (completedPercent * 100).ToString ("F") + "%";
 		}
 	}
 
@@ -49,7 +51,16 @@ public class GoalViewController : MonoBehaviour {
 	}
 
 	void Update () {
-	
+		var count = 0;
+		foreach (var item in goalCellList) {
+			var t = 0f;
+			t += Time.deltaTime * 1; //This will increment tParam based on Time.deltaTime multiplied by a speed multiplier
+			getProgressImage (item).fillAmount = Mathf.Lerp (0f, percentages[count++], (Time.time - startTime) * transitionSpeed);
+			getProgressImage (item).color = Color.Lerp(Color.red, Color.green, percentages[count-1]);
+			getCompletedProgress (item).text = (Mathf.Lerp(0, percentages[count-1], (Time.time - startTime) * transitionSpeed)*100).ToString ("F") + "%";
+		}
+
+//		RenderSettings.skybox.SetFloat("_Exposure", Mathf.Sin(Time.time * Mathf.Deg2Rad * 100) + 1);
 	}
 
 	private GoalListWrapperModel getObjectFromJson() {
